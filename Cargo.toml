@@ -1,0 +1,15 @@
+[package]
+name = "cyphertrade-service-bus-contracts"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+yft-service-sdk = { tag = "0.2.1", git = "https://github.com/ITYFT/yft-service-sdk.git", features = [
+    "my-service-bus",
+    "macros",
+] }
+
+serde = { version = "*", features = ["derive"] }
+
+prost = "*"
+prost-types = "*"
