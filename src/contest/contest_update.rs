@@ -14,7 +14,7 @@ pub struct ContestAccountsUpdateSbEvent {
 #[derive(Clone, PartialEq, ::prost::Message, Serialize, Deserialize)]
 pub struct ContestAccountUpdateGrpcModel {
     #[prost(string, tag = "1")]
-    pub contest_id: String,
+    pub contest_account_id: String,
     #[prost(double, tag = "2")]
     pub balance: f64,
     #[prost(double, tag = "3")]
