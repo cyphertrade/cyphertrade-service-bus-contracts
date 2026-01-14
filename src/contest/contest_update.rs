@@ -8,19 +8,27 @@ pub struct ContestAccountsUpdateSbEvent {
     #[prost(string, tag = "1")]
     pub contest_id: String,
     #[prost(message, repeated, tag = "2")]
-    pub accounts_updates: Vec<ContestAccountUpdateGrpcModel>,
+    pub accounts_updates: Vec<ContestAccountUpdateSbModel>,
 }
 
 #[derive(Clone, PartialEq, ::prost::Message, Serialize, Deserialize)]
-pub struct ContestAccountUpdateGrpcModel {
+pub struct ContestAccountUpdateSbModel {
     #[prost(string, tag = "1")]
     pub contest_account_id: String,
     #[prost(double, tag = "2")]
-    pub balance: f64,
-    #[prost(double, tag = "3")]
     pub equity: f64,
-    #[prost(double, tag = "4")]
-    pub margin: f64,
-    #[prost(double, tag = "5")]
-    pub free_margin: f64,
+    #[prost(message, repeated, tag = "3")]
+    pub active_positions: Vec<ContestAccountUpdatePositionSbModel>,
+}
+
+#[derive(Clone, PartialEq, ::prost::Message, Serialize, Deserialize)]
+pub struct ContestAccountUpdatePositionSbModel {
+    #[prost(string, tag = "1")]
+    pub id: String,
+    #[prost(bool, tag = "2")]
+    pub is_buy: bool,
+    #[prost(double, tag = "3")]
+    pub float_pl: f64,
+    #[prost(string, tag = "4")]
+    pub asset: String,
 }
