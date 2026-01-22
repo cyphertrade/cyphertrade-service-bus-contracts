@@ -1,0 +1,18 @@
+use serde::{Deserialize, Serialize};
+use yft_service_sdk::external::my_service_bus_sdk;
+use yft_service_sdk::external::my_service_bus_sdk::macros::my_sb_entity_protobuf_model;
+
+#[derive(Clone, PartialEq, ::prost::Message, Serialize, Deserialize)]
+#[my_sb_entity_protobuf_model(topic_id = "contest-participation-update")]
+pub struct ContestParticipationUpdateSbEvent {
+    #[prost(string, tag = "1")]
+    pub user_id: String,
+    #[prost(string, tag = "2")]
+    pub contest_id: String,
+    #[prost(string, tag = "3")]
+    pub status: String,
+    #[prost(uint32, optional, tag = "4")]
+    pub rank: Option<u32>,
+    #[prost(double, optional, tag = "5")]
+    pub pnl: Option<f64>,
+}
