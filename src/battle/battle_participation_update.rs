@@ -17,4 +17,8 @@ pub struct BattleParticipationUpdateSbEvent {
     pub is_winner: Option<bool>,
     #[prost(double, optional, tag = "5")]
     pub pnl: Option<f64>,
+    #[prost(int64, optional, tag = "6")]
+    pub joined_at: Option<i64>,
+    #[prost(int64, optional, tag = "7")]
+    pub activated_at: Option<i64>,
 }

@@ -17,4 +17,8 @@ pub struct ContestParticipationUpdateSbEvent {
     pub rank: Option<u32>,
     #[prost(double, optional, tag = "5")]
     pub pnl: Option<f64>,
+    #[prost(int64, optional, tag = "6")]
+    pub joined_at: Option<i64>,
+    #[prost(int64, optional, tag = "7")]
+    pub activated_at: Option<i64>,
 }
