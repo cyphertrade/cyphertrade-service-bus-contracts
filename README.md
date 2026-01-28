@@ -17,19 +17,60 @@ This crate contains the shared contract definitions for events and messages that
 
 ```
 src/
-├── lib.rs              # Library root, exports modules
+├── lib.rs
+├── battle/
+│   ├── mod.rs
+│   ├── battle_participation_update.rs
+│   └── battle_registration_update.rs
+├── contest/
+│   ├── mod.rs
+│   ├── contest_participation_update.rs
+│   ├── contest_registration_update.rs
+│   └── contest_update.rs
+├── profile/
+│   ├── mod.rs
+│   ├── personal_data_updated.rs
+│   └── public_profile_update.rs
 └── user/
-    ├── mod.rs          # User module
-    └── user_registered.rs  # UserRegistered event definition
+    ├── mod.rs
+    ├── user_login.rs
+    ├── user_registered.rs
+    └── user_updated.rs
 ```
 
-## Current Events
+## Events
 
 ### User Events
 
-- **`UserRegisteredSbEvent`**: Published when a new user registers
-  - Contains user information (id, email)
-  - Includes source tracking metadata
+| Event | Topic ID | Description |
+|-------|----------|-------------|
+| `UserRegisteredSbEvent` | `user-registered` | Published when a new user registers |
+| `UserLoginSbEvent` | `user-login` | Published when a user logs in |
+| `UserUpdatedSbEvent` | `user-updated` | Published when user data is updated |
+
+### Profile Events
+
+| Event | Topic ID | Description |
+|-------|----------|-------------|
+| `PersonalDataUpdatedSbEvent` | `personal-data-updated` | Published when user's personal data is updated |
+| `PublicProfileUpdateSbEvent` | `public-profile-update` | Published when user's public profile is updated |
+
+### Contest Events
+
+| Event | Topic ID | Description |
+|-------|----------|-------------|
+| `ContestRegistrationUpdateSbEvent` | `contest-registration-update` | Published when user registers/cancels contest registration |
+| `ContestParticipationUpdateSbEvent` | `contest-participation-update` | Published when participant status changes during contest |
+| `ContestAccountsUpdateSbEvent` | `contest-accounts-updates` | Published for contest account updates |
+
+### Battle Events
+
+Battle is a special type of Contest with `min_participants = 2`, `max_participants = 2`, and `auto_start_when_full = true`.
+
+| Event | Topic ID | Description |
+|-------|----------|-------------|
+| `BattleRegistrationUpdateSbEvent` | `battle-registration-update` | Published when user registers/cancels battle registration |
+| `BattleParticipationUpdateSbEvent` | `battle-participation-update` | Published when participant status changes during battle |
 
 ## Dependencies
 
@@ -43,7 +84,7 @@ Add this crate to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-cyphertrade-service-bus-contracts = { path = "../cyphertrade-service-bus-contracts" }
+cyphertrade-service-bus-contracts = { git = "...", tag = "x.x.x" }
 ```
 
 ### Example: Publishing an Event
@@ -65,15 +106,19 @@ let event = UserRegisteredSbEvent {
 // Publish to service bus using your service bus client
 ```
 
-### Example: Consuming an Event
+### Example: Consuming a Contest Event
 
 ```rust
-use cyphertrade_service_bus_contracts::user::user_registered::UserRegisteredSbEvent;
+use cyphertrade_service_bus_contracts::contest::contest_participation_update::ContestParticipationUpdateSbEvent;
 
-// In your service bus subscriber handler
-fn handle_user_registered(event: UserRegisteredSbEvent) {
-    if let Some(user) = event.user {
-        println!("User registered: {} ({})", user.email, user.id);
+fn handle_contest_participation(event: ContestParticipationUpdateSbEvent) {
+    println!(
+        "User {} participation in contest {}: status={}",
+        event.user_id, event.contest_id, event.status
+    );
+    
+    if let Some(rank) = event.rank {
+        println!("Final rank: {}", rank);
     }
 }
 ```
@@ -119,11 +164,10 @@ cargo test
 3. Export the module in the parent `mod.rs`
 4. Update this README with the new event documentation
 
+## Related Crates
+
+- **cyphertrade-bussines-events-contracts**: Base abstraction for business events (used by missions system)
+
 ## Versioning
 
 This project follows semantic versioning. Breaking changes to event structures will result in a major version bump.
-
-## License
-
-[Add your license here]
-
