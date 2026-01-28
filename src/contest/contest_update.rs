@@ -19,6 +19,8 @@ pub struct ContestAccountUpdateSbModel {
     pub equity: f64,
     #[prost(message, repeated, tag = "3")]
     pub active_positions: Vec<ContestAccountUpdatePositionSbModel>,
+    #[prost(string, tag = "4")]
+    pub user_id: String,
 }
 
 #[derive(Clone, PartialEq, ::prost::Message, Serialize, Deserialize)]
