@@ -116,7 +116,7 @@ fn handle_contest_participation(event: ContestParticipationUpdateSbEvent) {
         "User {} participation in contest {}: status={}",
         event.user_id, event.contest_id, event.status
     );
-    
+
     if let Some(rank) = event.rank {
         println!("Final rank: {}", rank);
     }
