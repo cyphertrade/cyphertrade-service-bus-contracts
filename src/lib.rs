@@ -1,4 +1,5 @@
 pub mod battle;
+pub mod broker_affiliate;
 pub mod common;
 pub mod contest;
 pub mod profile;
