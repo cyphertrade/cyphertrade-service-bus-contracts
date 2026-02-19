@@ -1,6 +1,7 @@
 pub mod battle;
 pub mod broker_affiliate;
 pub mod common;
+pub mod competition_position;
 pub mod contest;
 pub mod profile;
 pub mod user;
