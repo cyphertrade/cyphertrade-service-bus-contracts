@@ -14,3 +14,23 @@ pub enum ParticipationStatus {
     Finished = 1,
     Disqualified = 2,
 }
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq, ::prost::Enumeration, Serialize, Deserialize)]
+#[repr(i32)]
+pub enum ContestStatus {
+    Draft = 0,
+    RegistrationOpen = 1,
+    InProgress = 2,
+    Finished = 3,
+    Canceled = 4,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq, ::prost::Enumeration, Serialize, Deserialize)]
+#[repr(i32)]
+pub enum BattleStatus {
+    Draft = 0,
+    RegistrationOpen = 1,
+    InProgress = 2,
+    Finished = 3,
+    Canceled = 4,
+}
