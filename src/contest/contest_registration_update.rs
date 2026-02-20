@@ -13,4 +13,6 @@ pub struct ContestRegistrationUpdateSbEvent {
     pub contest_id: String,
     #[prost(enumeration = "RegistrationStatus", tag = "3")]
     pub status: i32,
+    #[prost(string, tag = "4")]
+    pub account_id: String,
 }
