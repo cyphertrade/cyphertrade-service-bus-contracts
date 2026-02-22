@@ -41,4 +41,6 @@ pub struct CompetitionPositionSbModel {
     pub create_date: u64,
     #[prost(uint64, optional, tag = "10")]
     pub close_date: Option<u64>,
+    #[prost(double, tag = "11")]
+    pub lots_amount: f64,
 }
