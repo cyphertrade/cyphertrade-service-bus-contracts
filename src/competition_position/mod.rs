@@ -1,1 +1,2 @@
 pub mod competition_positions;
+pub mod competition_positions_pl_update;
